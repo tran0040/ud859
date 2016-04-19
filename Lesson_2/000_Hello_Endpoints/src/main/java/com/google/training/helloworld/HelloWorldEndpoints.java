@@ -30,4 +30,12 @@ public class HelloWorldEndpoints {
     public HelloClass sayHelloByName (@Named("name") String name) {
         return new HelloClass(name);
     }
+
+    // Declare this method as a method available externally through Endpoints
+    @ApiMethod(name = "sayHelloByPeriod", path = "sayHelloByPeriod", httpMethod = HttpMethod.GET)
+
+    public HelloClass sayHelloByPeriod(@Named("name") String name, @Named("period") String period) {
+    	System.out.println(name + " " + period);
+    	return new HelloClass(name, period);
+    }
 }
