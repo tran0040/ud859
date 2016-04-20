@@ -30,7 +30,13 @@ public class Profile {
     	this.mainEmail = mainEmail;
     	this.teeShirtSize = teeShirtSize;
     }
-    
+
+    public Profile updateProfile(String displayName, TeeShirtSize teeShirtSize) {
+        this.displayName = (displayName != null ? displayName : this.displayName);
+        this.teeShirtSize = (teeShirtSize == TeeShirtSize.NOT_SPECIFIED || teeShirtSize == null ? this.teeShirtSize : teeShirtSize);
+        return this;
+    }
+
 	public String getDisplayName() {
 		return displayName;
 	}
