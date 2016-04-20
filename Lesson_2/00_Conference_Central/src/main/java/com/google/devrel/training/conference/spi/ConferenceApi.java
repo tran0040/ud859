@@ -5,6 +5,7 @@ import static com.google.devrel.training.conference.service.OfyService.ofy;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
+import com.google.api.server.spi.config.Named;
 import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 import com.google.devrel.training.conference.Constants;
@@ -28,18 +29,18 @@ public class ConferenceApi {
         return email == null ? null : email.substring(0, email.indexOf("@"));
     }
 
-    /**
-     * Creates or updates a Profile object associated with the given user
-     * object.
-     *
-     * @param user
-     *            A User object injected by the cloud endpoints.
-     * @param profileForm
-     *            A ProfileForm object sent from the client form.
-     * @return Profile object just created.
-     * @throws UnauthorizedException
-     *             when the User object is null.
-     */
+//    /**
+//     * Creates or updates a Profile object associated with the given user
+//     * object.
+//     *
+//     * @param user
+//     *            A User object injected by the cloud endpoints.
+//     * @param profileForm
+//     *            A ProfileForm object sent from the client form.
+//     * @return Profile object just created.
+//     * @throws UnauthorizedException
+//     *             when the User object is null.
+//     */
 
     // Declare this method as a method available externally through Endpoints
     @ApiMethod(name = "saveProfile", path = "profile", httpMethod = HttpMethod.POST)
@@ -48,7 +49,7 @@ public class ConferenceApi {
 
     // TODO 1 Pass the ProfileForm parameter
     // TODO 2 Pass the User parameter
-    public Profile saveProfile() throws UnauthorizedException {
+    public Profile saveProfile(ProfileForm profileForm) throws UnauthorizedException {
 
         String userId = null;
         String mainEmail = null;
@@ -61,10 +62,12 @@ public class ConferenceApi {
         // TODO 1
         // Set the teeShirtSize to the value sent by the ProfileForm, if sent
         // otherwise leave it as the default value
+        teeShirtSize = (profileForm.getTeeShirtSize() != null ? profileForm.getTeeShirtSize() : TeeShirtSize.NOT_SPECIFIED);
 
         // TODO 1
         // Set the displayName to the value sent by the ProfileForm, if sent
         // otherwise set it to null
+        displayName = (profileForm.getDisplayName() != null ? profileForm.getDisplayName() : null);
 
         // TODO 2
         // Get the userId and mainEmail
