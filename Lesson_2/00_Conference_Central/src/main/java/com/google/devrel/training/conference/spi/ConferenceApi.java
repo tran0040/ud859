@@ -52,7 +52,7 @@ public class ConferenceApi {
 
         // If the user is not logged in, throw an UnauthorizedException
         if (user == null) {
-            throw new UnauthorizedException("Authorization required");
+            throw new UnauthorizedException("Authorization required ");
         }
 
         // Set the teeShirtSize to the value sent by the ProfileForm, if sent
